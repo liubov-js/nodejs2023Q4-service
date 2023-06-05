@@ -13,7 +13,7 @@ import { ArtistService } from './artist.service';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { CreateArtistDto } from './dto/create-artist.dto';
 
-@Controller('track')
+@Controller('artist')
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) {}
 

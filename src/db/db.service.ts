@@ -11,7 +11,7 @@ export class InMemoryDb {
   albums: Album[] = [];
   tracks: Track[] = [];
   users: User[] = [];
-  favourites: Favorites = {
+  favorites: Favorites = {
     artists: [],
     tracks: [],
     albums: [],

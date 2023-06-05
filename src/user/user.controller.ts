@@ -23,7 +23,7 @@ export class UserController {
   }
 
   @Get(':id')
-  getById(@Param('id', ParseUUIDPipe) id: string) {
+  getById(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
     return this.userService.getOne(id);
   }
 
@@ -34,7 +34,7 @@ export class UserController {
 
   @Put(':id')
   updatePassword(
-    @Param('id', ParseUUIDPipe) id: string,
+    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
     @Body() updatePasswordDto: UpdatePasswordDto,
   ) {
     return this.userService.updateUserPassword(id, updatePasswordDto);
