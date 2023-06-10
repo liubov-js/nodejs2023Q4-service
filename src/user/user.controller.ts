@@ -19,7 +19,7 @@ export class UserController {
 
   @Get()
   getAll() {
-    return this.userService.getUsers();
+    return this.userService.getAll();
   }
 
   @Get(':id')
@@ -29,7 +29,7 @@ export class UserController {
 
   @Post()
   create(@Body() userDto: CreateUserDto) {
-    return this.userService.createUser(userDto);
+    return this.userService.create(userDto);
   }
 
   @Put(':id')
@@ -37,12 +37,12 @@ export class UserController {
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
     @Body() updatePasswordDto: UpdatePasswordDto,
   ) {
-    return this.userService.updateUserPassword(id, updatePasswordDto);
+    return this.userService.updatePassword(id, updatePasswordDto);
   }
 
   @Delete(':id')
   @HttpCode(204)
   deleteUser(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
-    return this.userService.deleteUser(id);
+    return this.userService.delete(id);
   }
 }
