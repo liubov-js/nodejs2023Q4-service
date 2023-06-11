@@ -62,7 +62,7 @@ export class UserService {
     updatedUser.password = dto.newPassword;
     updatedUser.updatedAt = Date.now();
 
-    return await this.userRepository.save(updatedUser);
+    return this.userRepository.save(updatedUser);
   }
 
   async delete(id: string) {
