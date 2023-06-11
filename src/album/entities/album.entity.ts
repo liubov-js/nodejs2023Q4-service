@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ArtistEntity } from '../../artist/entities/artist.entity';
 
 @Entity('albums')
 export class AlbumEntity {
@@ -13,6 +20,10 @@ export class AlbumEntity {
 
   @Column()
   artistId: string | null;
+
+  @OneToOne(() => ArtistEntity, (artist) => artist)
+  @JoinColumn()
+  artist: ArtistEntity[];
 
   toResponse() {
     const { id, name, year, artistId } = this;
