@@ -1,0 +1,44 @@
+version: '3.0'
+
+services:
+  main:
+    container_name: main
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - .:/home-library
+      - /home-library/node_modules
+    ports:
+      - ${PORT}:${PORT}
+      - 9229:9229
+    command: npm run start
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  postgres:
+    container_name: postgres
+    image: postgres:14
+    env_file:
+      - .env
+    environment:
+      PG_DATA: /var/lib/postgresql/data
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - pglogs:/var/lib/postgresql/postgresql.log
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  pglogs:
+
+networks:
+  default:
+    driver: bridge
