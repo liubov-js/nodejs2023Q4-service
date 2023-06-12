@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ForbiddenException,
   Injectable,
   NotFoundException,
@@ -48,10 +49,18 @@ export class UserService {
   }
 
   async updatePassword(id: string, dto: UpdatePasswordDto) {
+    if (Object.keys(dto).length < 2) {
+      throw new BadRequestException('Bad request');
+    }
+
     const updatedUser = await this.userRepository.findOne({ where: { id } });
 
     if (!updatedUser) {
       throw new NotFoundException('User not found');
+    }
+
+    if (dto.newPassword === dto.oldPassword) {
+      throw new ForbiddenException('You can not write the same password');
     }
 
     if (updatedUser.password !== dto.oldPassword) {
