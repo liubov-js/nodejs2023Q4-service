@@ -2,7 +2,7 @@ FROM node:12.13-alpine
 
 WORKDIR /home-library
 
-COPY package*.json ./
+COPY package*.json .
 
 RUN npm install
 
