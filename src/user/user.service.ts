@@ -23,7 +23,7 @@ export class UserService {
     return users.map((user) => user.toResponse());
   }
 
-  async getOne(id: string) {
+  async getUserById(id: string) {
     const user = await this.userRepository.findOne({ where: { id } });
 
     if (!user) {
@@ -80,5 +80,9 @@ export class UserService {
     if (result.affected === 0) {
       throw new NotFoundException('User not found');
     }
+  }
+
+  async getUserByLogin(login: string) {
+    return await this.userRepository.findOne({ where: { login } });
   }
 }

@@ -24,7 +24,7 @@ export class UserController {
 
   @Get(':id')
   getById(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
-    return this.userService.getOne(id);
+    return this.userService.getUserById(id);
   }
 
   @Post()
